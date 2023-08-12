@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home:
-          const LoginScreen(), // Usa la pantalla de inicio de sesión como página principal
+          const LoginScreen(),
     );
   }
 }
