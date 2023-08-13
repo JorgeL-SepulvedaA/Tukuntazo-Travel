@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:tukuntazo_travel/screens/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -27,6 +27,12 @@ class LoginScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Aquí puedes agregar la lógica para manejar el inicio de sesión
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const HomeScreen()), // Navega a la pantalla de inicio
+                );
               },
               child: const Text('Iniciar Sesión'),
             ),
