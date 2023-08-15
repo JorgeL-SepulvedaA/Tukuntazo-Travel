@@ -1,10 +1,7 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/screens/home_screen.dart';
 import 'package:tukuntazo_travel/auth/register_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+import 'package:tukuntazo_travel/databaseLogic/dbLogic.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -18,6 +15,48 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
+class ErrorDialog extends StatelessWidget {
+  const ErrorDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Advertencia'),
+          content: const Text('Algunos datos no coinciden'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                      const SignIn()),
+                );
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                      const Register()),
+                );
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      ),
+      child: const Text('Show Dialog'),
+    );
+  }
+}
+
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
 
@@ -27,12 +66,16 @@ class SignIn extends StatefulWidget {
 
 class _SignIn extends State<SignIn> {
   final txtUsuario = TextEditingController();
+  final txtUsuarioX = TextEditingController();
   final txtContrasena = TextEditingController();
+  final txtContrasenaX = TextEditingController();
 
   @override
   void dispose() {
     txtUsuario.dispose();
+    txtUsuarioX.dispose();
     txtContrasena.dispose();
+    txtContrasenaX.dispose();
     super.dispose();
   }
 
@@ -86,7 +129,38 @@ class _SignIn extends State<SignIn> {
                   const EdgeInsets.symmetric(vertical: 16.0), // Margen vertical
               child: ElevatedButton(
                 onPressed: () {
-                  const HomeScreen();
+                  getUsuario(txtUsuario.text, txtContrasena.text, txtUsuarioX.text, txtContrasenaX.text);
+                  switch(txtUsuario.text == txtUsuarioX.text && txtContrasena.text == txtContrasenaX.text){
+                    case true: {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const HomeScreen()),
+                      );
+                    }
+                    break;
+
+                    case false: {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const ErrorDialog()),
+                      );
+                    }
+                    break;
+
+                    default: {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const SignIn()),
+                      );
+                    }
+                    break;
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/auth/login_screen.dart';
-import 'dart:async';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+import 'package:tukuntazo_travel/databaseLogic/dbLogic.dart';
 
 
 void main() {
+  dbStructureCreateTable();
   runApp(const MainApp());
 }
 
