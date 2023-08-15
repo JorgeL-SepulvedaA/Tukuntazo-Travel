@@ -36,27 +36,31 @@ class _SignIn extends State<SignIn> {
     super.dispose();
   }
 
+  bool _showPassword = false;
+  bool _keepLoggedIn = false; // Estado para controlar la selección del checkbox
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: 
-      Padding(
+      body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 1.0), // Imagen del logo
             Container(
               width: double.infinity,
               height: 300.0,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Image.asset('assets/images/logo.png'),
-              ),
+            ),
 
-            const SizedBox(height: 24.0), // Separacion de los textField            
+            const SizedBox(height: 24.0), // textField de Usuario
             Container(
               width: double.infinity, // Ocupar el 100% del ancho
               decoration: BoxDecoration(
-                color: const Color.fromRGBO(245, 245, 245, 1), // Color de fondo #e3e3e3
+                color: const Color.fromRGBO(
+                    245, 245, 245, 1), // Color de fondo #e3e3e3
                 borderRadius: BorderRadius.circular(30.0), // Bordes redondeados
               ),
               padding: const EdgeInsets.symmetric(
@@ -78,35 +82,85 @@ class _SignIn extends State<SignIn> {
                 ],
               ),
             ),
-            
-            const SizedBox(height: 24.0), // Separacion de los textField
+
+            const SizedBox(height: 24.0), // textField de Contraseña
             Container(
-              width: double.infinity, // Ocupar el 100% del ancho
+              width: double.infinity,
               decoration: BoxDecoration(
-                color: const Color.fromRGBO(245, 245, 245, 1), // Color de fondo #e3e3e3
-                borderRadius: BorderRadius.circular(30.0), // Bordes redondeados
+                color: const Color.fromRGBO(245, 245, 245, 1),
+                borderRadius: BorderRadius.circular(30.0),
               ),
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0), // Espaciado horizontal
-              child: const Row(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
                 children: [
-                  Icon(Icons.lock, color: Colors.grey), // Icono
-                  SizedBox(width: 16.0), // Espacio entre el icono y el texto
+                  const Icon(Icons.lock, color: Colors.grey),
+                  const SizedBox(width: 16.0),
                   Expanded(
                     child: TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none, // Sin bordes
-                        hintText: 'Contraseña', // Placeholder
-                        hintStyle: TextStyle(
-                            color: Colors.grey), // Color del placeholder
+                      obscureText:
+                          !_showPassword, // Mostrar u ocultar contraseña según el estado
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Contraseña',
+                        hintStyle: TextStyle(color: Colors.grey),
                       ),
                     ),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      _showPassword ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _showPassword =
+                            !_showPassword; // Cambiar estado de visibilidad
+                      });
+                    },
                   ),
                 ],
               ),
             ),
-            
-            const SizedBox(height: 28.0), // Separacion de los textField
+
+            const SizedBox(height: 10.0), // textField de Contraseña
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  unselectedWidgetColor:
+                      Colors.grey, // Color del checkbox no seleccionado
+                  checkboxTheme: CheckboxThemeData(
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(2.0), // Bordes redondeados de 2px
+                    ),
+                  ),
+                ),
+                child: CheckboxListTile(
+                  title: const Text(
+                    'Mantener sesión iniciada',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14.0,
+                    ),
+                  ),
+                  dense: true, // Reducir el espacio entre el título y el checkbox
+                  value: _keepLoggedIn,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _keepLoggedIn = newValue!;
+                    });
+                  },
+                  controlAffinity: ListTileControlAffinity.leading,
+                  contentPadding: EdgeInsets.zero,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 28.0), // ElevatedButton de Iniciar Sesión
             Container(
               width: double.infinity,
               height: 50.0,
@@ -122,7 +176,8 @@ class _SignIn extends State<SignIn> {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
-                child: const Text( 'Iniciar Sesión',
+                child: const Text(
+                  'Iniciar Sesión',
                   style: TextStyle(color: Colors.white), // Texto en blanco
                 ),
               ),
