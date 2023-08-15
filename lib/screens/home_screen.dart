@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tukuntazo_travel/widgets/map_home.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
@@ -30,12 +32,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
-          Center(child: Text('Bienvenido al home')),
-          Center(child: Text('Página de Mapa')),
-          Center(child: Text('Perfil del Capturar')),
+        children: const [
+          MapHome(),// Center(child: Text('Página de home')),
           Center(child: Text('Página de Faboritos')),
-          Center(child: Text('Perfil del Perfil')),
+          Center(child: Text('Página de Nueva Captura')),
+          Center(child: Text('Página de Guardados')),
+          Center(child: Text('Página de perfil de usuario')),
         ],
       ),
       bottomNavigationBar: TabBar(
@@ -43,12 +45,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         indicatorColor: Colors.blue, // Cambia el color del indicador activo
         labelColor: Colors.blue, // Cambia el color del texto activo
         unselectedLabelColor: Colors.grey, // Cambia el color del texto inactivo
-        tabs: [
-          Tab(icon: Icon(Icons.home), text: 'Inicio'),
-          Tab(icon: Icon(Icons.map), text: 'Mapa'),
+        tabs: const [
+          Tab(icon: Icon(Icons.home), text: 'Home'),
+          Tab(icon: Icon(Icons.favorite), text: 'Favs'),
           Tab(icon: Icon(Icons.camera), text: 'Capturar'),
-          Tab(icon: Icon(Icons.star), text: 'Faboritos'),
-          Tab(icon: Icon(Icons.person), text: 'Perfil'),
+          Tab(icon: Icon(Icons.save), text: 'Saved'),
+          Tab(icon: Icon(Icons.person), text: 'Profile'),
         ],
       ),
     );
