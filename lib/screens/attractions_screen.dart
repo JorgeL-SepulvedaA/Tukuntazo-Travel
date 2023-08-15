@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   Future pickImage(source) async {
     final image = await ImagePicker().pickImage(source: source);
     if (image == null) return;
-    final result = await ImageGallerySaver.saveFile(image.path);
+    ImageGallerySaver.saveFile(image.path);
     final imageTemporary = File(image.path);
     setState(() {
       this.image = imageTemporary;
