@@ -11,7 +11,7 @@ class SignUpScreen extends StatelessWidget {
 }
 
 class Register extends StatefulWidget {
-  const Register({super.key})
+  const Register({Key? key}) : super(key: key);
 
   @override
   State<Register> createState() => _Register();
