@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Iniciar Sesión',
-      home: Register(),
+      home: SignIn(),
     );
   }
 }

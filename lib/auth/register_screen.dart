@@ -1,5 +1,11 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/auth/login_screen.dart';
+import 'package:tukuntazo_travel/screens/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -83,7 +89,7 @@ class _Register extends State<Register> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                      const LoginScreen()), // Navega a la pantalla de inicio
+                      const HomeScreen()), // Navega a la pantalla de inicio
                 );
               },
               child: const Text('Registrar'),
@@ -96,7 +102,7 @@ class _Register extends State<Register> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                      const LoginScreen()), // Navega a la pantalla de inicio de sesion
+                      const SignIn()), // Navega a la pantalla de inicio de sesion
                 );
               },
               child: const Text('¿Tienes tu cuenta? Inicia sesion'),
