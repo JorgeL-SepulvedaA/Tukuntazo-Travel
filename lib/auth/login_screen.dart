@@ -39,14 +39,20 @@ class _SignIn extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Iniciar Sesión'),
-      ),
-      body: Padding(
+      body: 
+      Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Container(
+              width: double.infinity,
+              height: 300.0,
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Image.asset('assets/images/logo.png'),
+              ),
+
+            const SizedBox(height: 24.0), // Separacion de los textField            
             Container(
               width: double.infinity, // Ocupar el 100% del ancho
               decoration: BoxDecoration(
@@ -72,13 +78,35 @@ class _SignIn extends State<SignIn> {
                 ],
               ),
             ),
-            const SizedBox(height: 16.0),
-            TextField(
-              controller: txtContrasena,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Contraseña'),
+            
+            const SizedBox(height: 24.0), // Separacion de los textField
+            Container(
+              width: double.infinity, // Ocupar el 100% del ancho
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(245, 245, 245, 1), // Color de fondo #e3e3e3
+                borderRadius: BorderRadius.circular(30.0), // Bordes redondeados
+              ),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0), // Espaciado horizontal
+              child: const Row(
+                children: [
+                  Icon(Icons.lock, color: Colors.grey), // Icono
+                  SizedBox(width: 16.0), // Espacio entre el icono y el texto
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none, // Sin bordes
+                        hintText: 'Contraseña', // Placeholder
+                        hintStyle: TextStyle(
+                            color: Colors.grey), // Color del placeholder
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 24.0),
+            
+            const SizedBox(height: 28.0), // Separacion de los textField
             Container(
               width: double.infinity,
               height: 50.0,
@@ -94,8 +122,7 @@ class _SignIn extends State<SignIn> {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
-                child: const Text(
-                  'Registrar',
+                child: const Text( 'Iniciar Sesión',
                   style: TextStyle(color: Colors.white), // Texto en blanco
                 ),
               ),
