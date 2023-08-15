@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/screens/home_screen.dart';
+import 'package:tukuntazo_travel/auth/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -39,6 +40,12 @@ class LoginScreen extends StatelessWidget {
             TextButton(
               onPressed: () {
                 // Aquí puedes agregar la navegación a la pantalla de registro
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                      const SignUpScreen()), // Navega a la pantalla de inicio
+                );
               },
               child: const Text('¿No tienes cuenta? Regístrate'),
             ),
