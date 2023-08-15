@@ -11,7 +11,7 @@ class SignUpScreen extends StatelessWidget {
 }
 
 class Register extends StatefulWidget {
-  const Register({super.key})
+  const Register({Key? key}) : super(key: key);
 
   @override
   State<Register> createState() => _Register();
@@ -71,7 +71,8 @@ class _Register extends State<Register> {
             TextField(
               controller: txtContrasenaa,
               obscureText: true,
-              decoration: const InputDecoration(labelText: 'Confirmar contraseña'),
+              decoration:
+                  const InputDecoration(labelText: 'Confirmar contraseña'),
             ),
             const SizedBox(height: 24.0),
             ElevatedButton(
@@ -82,7 +83,7 @@ class _Register extends State<Register> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                      const LoginScreen()), // Navega a la pantalla de inicio
+                          const LoginScreen()), // Navega a la pantalla de inicio
                 );
               },
               child: const Text('Registrar'),
@@ -94,7 +95,7 @@ class _Register extends State<Register> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                      const LoginScreen()), // Navega a la pantalla de inicio de sesion
+                          const LoginScreen()), // Navega a la pantalla de inicio de sesion
                 );
               },
               child: const Text('¿Tienes tu cuenta? Inicia sesion'),
@@ -104,5 +105,4 @@ class _Register extends State<Register> {
       ),
     );
   }
-
 }

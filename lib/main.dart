@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/auth/login_screen.dart';
+import 'package:tukuntazo_travel/screens/home_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -16,8 +17,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:
-          const LoginScreen(),
+      home: const HomeScreen(),
     );
   }
 }
