@@ -6,7 +6,10 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Register();
+    return const MaterialApp(
+      title: 'Regístrate',
+      home: Register(),
+    );
   }
 }
 
@@ -90,6 +93,7 @@ class _Register extends State<Register> {
             TextButton(
               onPressed: () {
                 // Aquí puedes agregar la navegación a la pantalla de registro
+
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
