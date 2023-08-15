@@ -21,7 +21,6 @@ class Register extends StatefulWidget {
 }
 
 class _Register extends State<Register> {
-  final txt = TextEditingController();
   final txtNombre = TextEditingController();
   final txtUsuario = TextEditingController();
   final txtEmail = TextEditingController();

@@ -7,6 +7,33 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Iniciar Sesión',
+      home: Register(),
+    );
+  }
+}
+
+class SignIn extends StatefulWidget {
+  const SignIn({Key? key}) : super(key: key);
+
+  @override
+  State<SignIn> createState() => _SignIn();
+}
+
+class _SignIn extends State<SignIn> {
+  final txtUsuario = TextEditingController();
+  final txtContrasena = TextEditingController();
+
+  @override
+  void dispose() {
+    txtUsuario.dispose();
+    txtContrasena.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Iniciar Sesión'),
@@ -16,13 +43,15 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const TextField(
-              decoration: InputDecoration(labelText: 'Usuario'),
+            TextField(
+              controller: txtUsuario,
+              decoration: const InputDecoration(labelText: 'Usuario'),
             ),
             const SizedBox(height: 16.0),
-            const TextField(
+            TextField(
+              controller: txtContrasena,
               obscureText: true,
-              decoration: InputDecoration(labelText: 'Contraseña'),
+              decoration: const InputDecoration(labelText: 'Contraseña'),
             ),
             const SizedBox(height: 24.0),
             ElevatedButton(
@@ -32,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          const HomeScreen()), // Navega a la pantalla de inicio
+                      const HomeScreen()), // Navega a la pantalla de inicio
                 );
               },
               child: const Text('Iniciar Sesión'),
