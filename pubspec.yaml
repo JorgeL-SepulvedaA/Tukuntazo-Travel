@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   flutter_map: ^0.13.1
   latlong2: ^0.8.2
+  shared_preferences: ^2.2.0
+  sqflite: ^2.3.0
 
 dev_dependencies:
   flutter_test:

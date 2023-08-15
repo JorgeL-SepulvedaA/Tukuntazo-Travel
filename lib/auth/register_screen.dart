@@ -29,7 +29,6 @@ class _Register extends State<Register> {
 
   @override
   void dispose() {
-    txt.dispose();
     txtNombre.dispose();
     txtUsuario.dispose();
     txtEmail.dispose();
