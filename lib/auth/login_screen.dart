@@ -67,7 +67,7 @@ class _SignIn extends State<SignIn> {
                   horizontal: 16.0), // Espaciado horizontal
               child: const Row(
                 children: [
-                  Icon(Icons.person, color: Colors.grey), // Icono
+                  Icon(Icons.person, color: Colors.red), // Icono
                   SizedBox(width: 16.0), // Espacio entre el icono y el texto
                   Expanded(
                     child: TextField(
@@ -93,7 +93,7 @@ class _SignIn extends State<SignIn> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
                 children: [
-                  const Icon(Icons.lock, color: Colors.grey),
+                  const Icon(Icons.lock, color: Colors.red),
                   const SizedBox(width: 16.0),
                   Expanded(
                     child: TextField(
@@ -109,7 +109,7 @@ class _SignIn extends State<SignIn> {
                   IconButton(
                     icon: Icon(
                       _showPassword ? Icons.visibility : Icons.visibility_off,
-                      color: Colors.grey,
+                      color: Colors.red,
                     ),
                     onPressed: () {
                       setState(() {
@@ -130,7 +130,7 @@ class _SignIn extends State<SignIn> {
               child: Theme(
                 data: Theme.of(context).copyWith(
                   unselectedWidgetColor:
-                      Colors.grey, // Color del checkbox no seleccionado
+                  Color.fromRGBO(2, 35, 120, 1), // Color del checkbox no seleccionado
                   checkboxTheme: CheckboxThemeData(
                     shape: RoundedRectangleBorder(
                       borderRadius:
@@ -142,7 +142,7 @@ class _SignIn extends State<SignIn> {
                   title: const Text(
                     'Mantener sesión iniciada',
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: Color.fromRGBO(2, 35, 120, 1),
                       fontWeight: FontWeight.w500,
                       fontSize: 14.0,
                     ),
@@ -168,10 +168,11 @@ class _SignIn extends State<SignIn> {
                   const EdgeInsets.symmetric(vertical: 16.0), // Margen vertical
               child: ElevatedButton(
                 onPressed: () {
+
                   const HomeScreen();
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Color.fromRGBO(2, 35, 120, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
@@ -192,7 +193,9 @@ class _SignIn extends State<SignIn> {
                           const SignUpScreen()), // Navega a la pantalla de inicio
                 );
               },
-              child: const Text('¿No tienes cuenta? Regístrate'),
+              child: const Text(
+                  '¿No tienes cuenta? Regístrate',
+                  style: TextStyle(color: Color.fromRGBO(2, 35, 120, 1))),
             ),
           ],
         ),
