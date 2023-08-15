@@ -1,11 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/auth/login_screen.dart';
+import 'package:tukuntazo_travel/main.dart';
 import 'package:tukuntazo_travel/screens/home_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -15,6 +12,44 @@ class SignUpScreen extends StatelessWidget {
     return const MaterialApp(
       title: 'Regístrate',
       home: Register(),
+    );
+  }
+}
+
+class ErrorDialog extends StatelessWidget {
+  const ErrorDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Advertencia'),
+          content: const Text('Algunos datos no coinciden'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignIn()),
+                );
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Register()),
+                );
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      ),
+      child: const Text('Show Dialog'),
     );
   }
 }
@@ -78,31 +113,50 @@ class _Register extends State<Register> {
             TextField(
               controller: txtContrasenaa,
               obscureText: true,
-              decoration: const InputDecoration(labelText: 'Confirmar contraseña'),
+              decoration:
+                  const InputDecoration(labelText: 'Confirmar contraseña'),
             ),
             const SizedBox(height: 24.0),
             ElevatedButton(
-              onPressed: () {
-                // Aquí puedes agregar la lógica para manejar el inicio de sesión
+              onPressed: () async {
+                switch (txtContrasena.text == txtContrasenaa.text) {
+                  case true:
+                    {
+                      //var user = Usuarios(nombre: txtNombre.text, usuario: txtUsuario.text, correo: txtEmail.text, contrasena: txtContrasena.text);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreen()),
+                      );
+                    }
+                    break;
+                  case false:
+                    {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ErrorDialog()),
+                      );
+                    }
+                    break;
 
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                      const HomeScreen()), // Navega a la pantalla de inicio
-                );
+                  default:
+                    {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const SignIn()),
+                      );
+                    }
+                    break;
+                }
               },
               child: const Text('Registrar'),
             ),
             TextButton(
               onPressed: () {
-                // Aquí puedes agregar la navegación a la pantalla de registro
-
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                      const SignIn()), // Navega a la pantalla de inicio de sesion
+                  MaterialPageRoute(builder: (context) => const SignIn()),
                 );
               },
               child: const Text('¿Tienes tu cuenta? Inicia sesion'),
@@ -112,5 +166,4 @@ class _Register extends State<Register> {
       ),
     );
   }
-
 }
