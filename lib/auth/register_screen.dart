@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/auth/login_screen.dart';
-import 'package:tukuntazo_travel/databaseLogic/dbLogic.dart';
+import 'package:tukuntazo_travel/main.dart';
 import 'package:tukuntazo_travel/screens/home_screen.dart';
+import 'package:tukuntazo_travel/main.dart';
 
 
 class SignUpScreen extends StatelessWidget {
@@ -122,10 +123,10 @@ class _Register extends State<Register> {
             ),
             const SizedBox(height: 24.0),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 switch(txtContrasena.text == txtContrasenaa.text){
                   case true: {
-                    addUser();
+                    var user = Usuarios(nombre: txtNombre.text, usuario: txtUsuario.text, correo: txtEmail.text, contrasena: txtContrasena.text);
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -174,15 +175,4 @@ class _Register extends State<Register> {
       ),
     );
   }
-
-  Future<void> addUser() async {
-    var user = Usuarios(
-      nombre: '$txtNombre',
-      usuario: '$txtUsuario',
-      correo: '$txtEmail',
-      contrasena: '$txtContrasena',
-    );
-    await insertUsuario(user);
-  }
-
 }

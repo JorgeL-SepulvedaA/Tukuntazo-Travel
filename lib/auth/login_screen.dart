@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/screens/home_screen.dart';
 import 'package:tukuntazo_travel/auth/register_screen.dart';
-import 'package:tukuntazo_travel/databaseLogic/dbLogic.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
