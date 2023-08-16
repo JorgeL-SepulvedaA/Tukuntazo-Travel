@@ -8,7 +8,7 @@ Future<void> fetchFirebase() async {
   await Firebase.initializeApp();
 }
 
-void main() async {
+void main() {
   fetchFirebase();
   runApp(const MainApp());
 }
