@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen>
         controller: _tabController,
         children: const [
           MapHome(), // Center(child: Text('Página de home')),
-          Center(child: Text('Página de Faboritos')),
+          Center(child: Text('Página de Favoritos')),
           // attractions_screen(),
           Center(child: Text('Página de Guardados')),
           Center(child: Text('Página de perfil de usuario')),
