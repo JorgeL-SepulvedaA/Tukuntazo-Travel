@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen>
         children: const [
           MapHome(), // Center(child: Text('Página de home')),
           Center(child: Text('Página de Faboritos')),
-          attractions_screen(),
+          // attractions_screen(),
           Center(child: Text('Página de Guardados')),
           Center(child: Text('Página de perfil de usuario')),
         ],
