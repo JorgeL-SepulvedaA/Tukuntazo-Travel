@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/widgets/map_home.dart';
+import 'package:tukuntazo_travel/screens/attractions_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,13 +10,15 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 5, vsync: this); // 3 tabs: Inicio, Buscar, Perfil
+    _tabController =
+        TabController(length: 5, vsync: this); // 3 tabs: Inicio, Buscar, Perfil
   }
 
   @override
@@ -33,9 +36,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       body: TabBarView(
         controller: _tabController,
         children: const [
-          MapHome(),// Center(child: Text('Página de home')),
+          MapHome(), // Center(child: Text('Página de home')),
           Center(child: Text('Página de Faboritos')),
-          Center(child: Text('Página de Nueva Captura')),
+          attractions_screen(),
           Center(child: Text('Página de Guardados')),
           Center(child: Text('Página de perfil de usuario')),
         ],

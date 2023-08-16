@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/auth/login_screen.dart';
+import 'package:tukuntazo_travel/main.dart';
 import 'package:tukuntazo_travel/screens/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -14,6 +14,44 @@ class SignUpScreen extends StatelessWidget {
     return const MaterialApp(
       title: 'Regístrate',
       home: Register(),
+    );
+  }
+}
+
+class ErrorDialog extends StatelessWidget {
+  const ErrorDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Advertencia'),
+          content: const Text('Algunos datos no coinciden'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignIn()),
+                );
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Register()),
+                );
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      ),
+      child: const Text('Show Dialog'),
     );
   }
 }
@@ -74,9 +112,7 @@ class _Register extends State<Register> {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                      const SignIn()), // Navega a la pantalla de inicio de sesion
+                  MaterialPageRoute(builder: (context) => const SignIn()),
                 );
               },
               child: const Text('¿Tienes tu cuenta? Inicia sesion'),
