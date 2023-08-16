@@ -136,7 +136,7 @@ class _Register extends State<Register> {
                       !_showPassword, // Mostrar u ocultar contraseña según el estado
                       decoration: const InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Contraseña',
+                        hintText: 'Ingresa una contraseña',
                         hintStyle: TextStyle(color: Colors.grey),
                       ),
                     ),
@@ -157,9 +157,35 @@ class _Register extends State<Register> {
               ),
             ),
 
-            ElevatedButton(
+            const SizedBox(height: 28.0),
+            Container(
+              width: double.infinity,
+              height: 50.0,
+              margin:
+              const EdgeInsets.symmetric(vertical: 16.0), // Margen vertical
+              child: ElevatedButton(
+                onPressed: () async {
+                  // if(await signUp(txtEmail.text, txtContrasena.text)) {
+                  //   // const ();
+                  // } else {
+                  //   // const HomeScreen();
+                  // }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(2, 35, 120, 1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
+                child: const Text(
+                  'Registrar mi usuario',
+                  style: TextStyle(color: Colors.white), // Texto en blanco
+                ),
+              ),
+            ),
+            TextButton(
               onPressed: () {
-                signUp(txtEmail.text, txtContrasena.text);
+                // Aquí puedes agregar la navegación a la pantalla de registro
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -167,17 +193,32 @@ class _Register extends State<Register> {
                       const SignIn()), // Navega a la pantalla de inicio
                 );
               },
-              child: const Text('Registrar'),
+              child: const Text(
+                  '¿Tienes tu cuenta? Inicia sesion',
+                  style: TextStyle(color: Color.fromRGBO(2, 35, 120, 1))),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SignIn()),
-                );
-              },
-              child: const Text('¿Tienes tu cuenta? Inicia sesion'),
-            ),
+
+            // ElevatedButton(
+            //   onPressed: () {
+            //     signUp(txtEmail.text, txtContrasena.text);
+            //     Navigator.pushReplacement(
+            //       context,
+            //       MaterialPageRoute(
+            //           builder: (context) =>
+            //           const SignIn()), // Navega a la pantalla de inicio
+            //     );
+            //   },
+            //   child: const Text('Registrar'),
+            // ),
+            // TextButton(
+            //   onPressed: () {
+            //     Navigator.pushReplacement(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => const SignIn()),
+            //     );
+            //   },
+            //   child: const Text(''),
+            // ),
           ],
         ),
       ),
