@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/auth/login_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:tukuntazo_travel/auth/FirestoreLogic.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -64,9 +64,11 @@ class Register extends StatefulWidget {
 class _Register extends State<Register> {
   final txtEmail = TextEditingController();
   final txtContrasena = TextEditingController();
+  final txtNombre = TextEditingController();
 
   @override
   void dispose() {
+    txtNombre.dispose();
     txtEmail.dispose();
     txtContrasena.dispose();
     super.dispose();
@@ -90,27 +92,51 @@ class _Register extends State<Register> {
               child: Image.asset('assets/images/signup.png'),
             ),
 
-            const SizedBox(height: 24.0), // textField de Usuario
+            // const SizedBox(height: 24.0), // textField de Contraseña
+            // Container(
+            //   width: double.infinity,
+            //   decoration: BoxDecoration(
+            //     color: const Color.fromRGBO(245, 245, 245, 1),
+            //     borderRadius: BorderRadius.circular(30.0),
+            //   ),
+            //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            //   child: Row(
+            //     children: [
+            //       const Icon(Icons.person, color: Colors.red),
+            //       const SizedBox(width: 16.0),
+            //       Expanded(
+            //         child: TextField(
+            //           controller: txtNombre,
+            //           decoration: const InputDecoration(
+            //             border: InputBorder.none,
+            //             hintText: 'Nombre',
+            //             hintStyle: TextStyle(color: Colors.grey),
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+
+            const SizedBox(height: 24.0),
             Container(
-              width: double.infinity, // Ocupar el 100% del ancho
+              width: double.infinity,
               decoration: BoxDecoration(
-                color: const Color.fromRGBO(245, 245, 245, 1), // Color de fondo #e3e3e3
-                borderRadius: BorderRadius.circular(30.0), // Bordes redondeados
+                color: const Color.fromRGBO(245, 245, 245, 1),
+                borderRadius: BorderRadius.circular(30.0),
               ),
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0), // Espaciado horizontal
-              child: const Row(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
                 children: [
-                  Icon(Icons.person, color: Colors.red), // Icono
-                  SizedBox(width: 16.0), // Espacio entre el icono y el texto
+                  const Icon(Icons.email, color: Colors.red),
+                  const SizedBox(width: 16.0),
                   Expanded(
                     child: TextField(
-                      // controller: txtEmail,
-                      decoration: InputDecoration(
-                        border: InputBorder.none, // Sin bordes
-                        hintText: 'Registra tu correo', // Placeholder
-                        hintStyle: TextStyle(
-                            color: Colors.grey), // Color del placeholder
+                      controller: txtEmail,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Nombre de usuario',
+                        hintStyle: TextStyle(color: Colors.grey),
                       ),
                     ),
                   ),
@@ -132,6 +158,7 @@ class _Register extends State<Register> {
                   const SizedBox(width: 16.0),
                   Expanded(
                     child: TextField(
+                      controller: txtContrasena,
                       obscureText:
                       !_showPassword,
                       decoration: const InputDecoration(
@@ -165,7 +192,7 @@ class _Register extends State<Register> {
               const EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
                 onPressed: () {
-                  signUp(txtEmail.text, txtContrasena.text);
+                      signUp(txtEmail.text, txtContrasena.text);
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -203,7 +230,7 @@ class _Register extends State<Register> {
       ),
     );
   }
-// Sign up with email and password
+  // Sign up with email and password
   Future<void> signUp(String email, String password) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
