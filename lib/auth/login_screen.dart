@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tukuntazo_travel/screens/home_screen.dart';
 import 'package:tukuntazo_travel/auth/register_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -164,12 +164,8 @@ class _SignIn extends State<SignIn> {
               margin:
                   const EdgeInsets.symmetric(vertical: 16.0), // Margen vertical
               child: ElevatedButton(
-                onPressed: () async {
-                  if(await signIn(txtUsuario.text, txtContrasena.text)) {
-                    const HomeScreen();
-                  } else {
-                    const HomeScreen();
-                  }
+                onPressed: () {
+                  signIn(txtUsuario.text, txtContrasena.text);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(2, 35, 120, 1),
@@ -203,16 +199,14 @@ class _SignIn extends State<SignIn> {
     );
   }
   // Sign in with email and password
-  Future<bool> signIn(String email, String password) async {
+  Future<void> signIn(String email, String password) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return true;
     } catch (e) {
       print('Error: $e');
-      return false;
     }
   }
 }
