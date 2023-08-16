@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tukuntazo_travel/screens/home_screen.dart';
 import 'package:tukuntazo_travel/auth/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -166,9 +165,9 @@ class _SignIn extends State<SignIn> {
               child: ElevatedButton(
                 onPressed: () async {
                   if(await signIn(txtUsuario.text, txtContrasena.text)) {
-                    const HomeScreen();
+                    // const ();
                   } else {
-                    const HomeScreen();
+                    // const HomeScreen();
                   }
                 },
                 style: ElevatedButton.styleFrom(
