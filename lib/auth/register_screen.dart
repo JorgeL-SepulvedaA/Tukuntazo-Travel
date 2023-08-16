@@ -1,10 +1,9 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/auth/login_screen.dart';
 import 'package:tukuntazo_travel/screens/home_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 
 class SignUpScreen extends StatelessWidget {
@@ -27,19 +26,13 @@ class Register extends StatefulWidget {
 }
 
 class _Register extends State<Register> {
-  final txtNombre = TextEditingController();
-  final txtUsuario = TextEditingController();
   final txtEmail = TextEditingController();
   final txtContrasena = TextEditingController();
-  final txtContrasenaa = TextEditingController();
 
   @override
   void dispose() {
-    txtNombre.dispose();
-    txtUsuario.dispose();
     txtEmail.dispose();
     txtContrasena.dispose();
-    txtContrasenaa.dispose();
     super.dispose();
   }
 
@@ -55,16 +48,6 @@ class _Register extends State<Register> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              controller: txtNombre,
-              decoration: const InputDecoration(labelText: 'Nombre'),
-            ),
-            const SizedBox(height: 24.0),
-            TextField(
-              controller: txtUsuario,
-              decoration: const InputDecoration(labelText: 'Usuario'),
-            ),
-            const SizedBox(height: 24.0),
-            TextField(
               controller: txtEmail,
               decoration: const InputDecoration(labelText: 'Email'),
             ),
@@ -75,29 +58,20 @@ class _Register extends State<Register> {
               decoration: const InputDecoration(labelText: 'Contraseña'),
             ),
             const SizedBox(height: 24.0),
-            TextField(
-              controller: txtContrasenaa,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Confirmar contraseña'),
-            ),
-            const SizedBox(height: 24.0),
             ElevatedButton(
               onPressed: () {
-                // Aquí puedes agregar la lógica para manejar el inicio de sesión
-
+                signUp(txtEmail.text, txtContrasena.text);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                      const HomeScreen()), // Navega a la pantalla de inicio
+                      const SignIn()), // Navega a la pantalla de inicio
                 );
               },
               child: const Text('Registrar'),
             ),
             TextButton(
               onPressed: () {
-                // Aquí puedes agregar la navegación a la pantalla de registro
-
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -112,5 +86,15 @@ class _Register extends State<Register> {
       ),
     );
   }
-
+// Sign up with email and password
+  Future<void> signUp(String email, String password) async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
 }
