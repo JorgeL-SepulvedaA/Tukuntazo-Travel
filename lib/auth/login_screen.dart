@@ -165,7 +165,7 @@ class _SignIn extends State<SignIn> {
                   const EdgeInsets.symmetric(vertical: 16.0), // Margen vertical
               child: ElevatedButton(
                 onPressed: () {
-                  signIn(txtUsuario.text, txtContrasena.text);
+                  //signIn(txtUsuario.text, txtContrasena.text);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(2, 35, 120, 1),
@@ -197,16 +197,5 @@ class _SignIn extends State<SignIn> {
         ),
       ),
     );
-  }
-  // Sign in with email and password
-  Future<void> signIn(String email, String password) async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } catch (e) {
-      print('Error: $e');
-    }
   }
 }
