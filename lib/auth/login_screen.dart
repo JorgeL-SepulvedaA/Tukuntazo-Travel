@@ -1,10 +1,7 @@
-import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/screens/home_screen.dart';
 import 'package:tukuntazo_travel/auth/register_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -130,7 +127,7 @@ class _SignIn extends State<SignIn> {
               child: Theme(
                 data: Theme.of(context).copyWith(
                   unselectedWidgetColor:
-                  Color.fromRGBO(2, 35, 120, 1), // Color del checkbox no seleccionado
+                  const Color.fromRGBO(2, 35, 120, 1), // Color del checkbox no seleccionado
                   checkboxTheme: CheckboxThemeData(
                     shape: RoundedRectangleBorder(
                       borderRadius:
@@ -167,12 +164,15 @@ class _SignIn extends State<SignIn> {
               margin:
                   const EdgeInsets.symmetric(vertical: 16.0), // Margen vertical
               child: ElevatedButton(
-                onPressed: () {
-
-                  const HomeScreen();
+                onPressed: () async {
+                  if(await signIn(txtUsuario.text, txtContrasena.text)) {
+                    const HomeScreen();
+                  } else {
+                    const HomeScreen();
+                  }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromRGBO(2, 35, 120, 1),
+                  backgroundColor: const Color.fromRGBO(2, 35, 120, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
@@ -201,5 +201,18 @@ class _SignIn extends State<SignIn> {
         ),
       ),
     );
+  }
+  // Sign in with email and password
+  Future<bool> signIn(String email, String password) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return true;
+    } catch (e) {
+      print('Error: $e');
+      return false;
+    }
   }
 }

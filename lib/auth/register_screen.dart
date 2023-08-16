@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/auth/login_screen.dart';
 import 'package:tukuntazo_travel/main.dart';
 import 'package:tukuntazo_travel/screens/home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -62,19 +64,13 @@ class Register extends StatefulWidget {
 }
 
 class _Register extends State<Register> {
-  final txtNombre = TextEditingController();
-  final txtUsuario = TextEditingController();
   final txtEmail = TextEditingController();
   final txtContrasena = TextEditingController();
-  final txtContrasenaa = TextEditingController();
 
   @override
   void dispose() {
-    txtNombre.dispose();
-    txtUsuario.dispose();
     txtEmail.dispose();
     txtContrasena.dispose();
-    txtContrasenaa.dispose();
     super.dispose();
   }
 
@@ -90,16 +86,6 @@ class _Register extends State<Register> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              controller: txtNombre,
-              decoration: const InputDecoration(labelText: 'Nombre'),
-            ),
-            const SizedBox(height: 24.0),
-            TextField(
-              controller: txtUsuario,
-              decoration: const InputDecoration(labelText: 'Usuario'),
-            ),
-            const SizedBox(height: 24.0),
-            TextField(
               controller: txtEmail,
               decoration: const InputDecoration(labelText: 'Email'),
             ),
@@ -110,45 +96,15 @@ class _Register extends State<Register> {
               decoration: const InputDecoration(labelText: 'Contraseña'),
             ),
             const SizedBox(height: 24.0),
-            TextField(
-              controller: txtContrasenaa,
-              obscureText: true,
-              decoration:
-                  const InputDecoration(labelText: 'Confirmar contraseña'),
-            ),
-            const SizedBox(height: 24.0),
             ElevatedButton(
-              onPressed: () async {
-                switch (txtContrasena.text == txtContrasenaa.text) {
-                  case true:
-                    {
-                      //var user = Usuarios(nombre: txtNombre.text, usuario: txtUsuario.text, correo: txtEmail.text, contrasena: txtContrasena.text);
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeScreen()),
-                      );
-                    }
-                    break;
-                  case false:
-                    {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ErrorDialog()),
-                      );
-                    }
-                    break;
-
-                  default:
-                    {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => const SignIn()),
-                      );
-                    }
-                    break;
-                }
+              onPressed: () {
+                signUp(txtEmail.text, txtContrasena.text);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                      const SignIn()), // Navega a la pantalla de inicio
+                );
               },
               child: const Text('Registrar'),
             ),
@@ -165,5 +121,16 @@ class _Register extends State<Register> {
         ),
       ),
     );
+  }
+// Sign up with email and password
+  Future<void> signUp(String email, String password) async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 }

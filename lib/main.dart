@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/auth/login_screen.dart';
-import 'dart:async';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MainApp());
 }
 
