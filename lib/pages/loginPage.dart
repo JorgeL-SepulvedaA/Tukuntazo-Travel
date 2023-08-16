@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
               const Divider(),
               const SizedBox(height: 10),
               const Text(
-                'Or continue with',
+                'O continua con',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Color(0xFF707070)),
               ),
@@ -117,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Not a member?',
+                    'No estas registrado?',
                     style: TextStyle(color: Colors.grey[700]),
                   ),
                   const SizedBox(width: 4),
