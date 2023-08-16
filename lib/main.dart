@@ -3,18 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/auth/login_screen.dart';
 import 'package:tukuntazo_travel/firebase_options.dart';
 
-Future<void> fetchFirebase() async {
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-}
-
-void main() {
-  fetchFirebase();
   runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  const MainApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
