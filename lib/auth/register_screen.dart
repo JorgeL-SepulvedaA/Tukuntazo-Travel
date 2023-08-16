@@ -133,7 +133,7 @@ class _Register extends State<Register> {
                   Expanded(
                     child: TextField(
                       obscureText:
-                      !_showPassword, // Mostrar u ocultar contraseña según el estado
+                      !_showPassword,
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Ingresa una contraseña',
@@ -149,7 +149,7 @@ class _Register extends State<Register> {
                     onPressed: () {
                       setState(() {
                         _showPassword =
-                        !_showPassword; // Cambiar estado de visibilidad
+                        !_showPassword;
                       });
                     },
                   ),
@@ -162,14 +162,16 @@ class _Register extends State<Register> {
               width: double.infinity,
               height: 50.0,
               margin:
-              const EdgeInsets.symmetric(vertical: 16.0), // Margen vertical
+              const EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
-                onPressed: () async {
-                  // if(await signUp(txtEmail.text, txtContrasena.text)) {
-                  //   // const ();
-                  // } else {
-                  //   // const HomeScreen();
-                  // }
+                onPressed: () {
+                  signUp(txtEmail.text, txtContrasena.text);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const SignIn()),
+                      );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(2, 35, 120, 1),
@@ -185,40 +187,17 @@ class _Register extends State<Register> {
             ),
             TextButton(
               onPressed: () {
-                // Aquí puedes agregar la navegación a la pantalla de registro
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                      const SignIn()), // Navega a la pantalla de inicio
+                      const SignIn()),
                 );
               },
               child: const Text(
                   '¿Tienes tu cuenta? Inicia sesion',
                   style: TextStyle(color: Color.fromRGBO(2, 35, 120, 1))),
             ),
-
-            // ElevatedButton(
-            //   onPressed: () {
-            //     signUp(txtEmail.text, txtContrasena.text);
-            //     Navigator.pushReplacement(
-            //       context,
-            //       MaterialPageRoute(
-            //           builder: (context) =>
-            //           const SignIn()), // Navega a la pantalla de inicio
-            //     );
-            //   },
-            //   child: const Text('Registrar'),
-            // ),
-            // TextButton(
-            //   onPressed: () {
-            //     Navigator.pushReplacement(
-            //       context,
-            //       MaterialPageRoute(builder: (context) => const SignIn()),
-            //     );
-            //   },
-            //   child: const Text(''),
-            // ),
           ],
         ),
       ),
