@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'SignIn.dart';
 
 class JoinUp extends StatelessWidget{
@@ -22,12 +22,14 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUp extends State<SignUp> {
+  final _id = TextEditingController();
   final _username = TextEditingController();
   final _password = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
+    _id.dispose();
     _username.dispose();
     _password.dispose();
   }
@@ -57,19 +59,18 @@ class _SignUp extends State<SignUp> {
                 color: const Color.fromRGBO(245, 245, 245, 1),
                 borderRadius: BorderRadius.circular(30.0),
               ),
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0),
-              child: const Row(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
                 children: [
-                  Icon(Icons.person, color: Colors.red),
-                  SizedBox(width: 16.0),
+                  const Icon(Icons.lock, color: Colors.red),
+                  const SizedBox(width: 16.0),
                   Expanded(
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: _id,
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Usuario',
-                        hintStyle: TextStyle(
-                            color: Colors.grey),
+                        hintText: 'Cédula',
+                        hintStyle: TextStyle(color: Colors.grey),
                       ),
                     ),
                   ),
@@ -91,6 +92,33 @@ class _SignUp extends State<SignUp> {
                   const SizedBox(width: 16.0),
                   Expanded(
                     child: TextField(
+                      controller: _username,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Nombre de usuario',
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 24.0),
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(245, 245, 245, 1),
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                children: [
+                  const Icon(Icons.lock, color: Colors.red),
+                  const SizedBox(width: 16.0),
+                  Expanded(
+                    child: TextField(
+                      controller: _password,
                       obscureText:
                       !_showPassword,
                       decoration: const InputDecoration(
@@ -124,6 +152,7 @@ class _SignUp extends State<SignUp> {
               const EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
                 onPressed: () {
+                  saveUser(_id.text, _username.text, _password.text);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(2, 35, 120, 1),
@@ -155,5 +184,11 @@ class _SignUp extends State<SignUp> {
         ),
       ),
     );
+  }
+  Future<void> saveUser(String userID, String username, String password) async {
+    // Obtain shared preferences.
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.setStringList('$username', <String>['$userID', '$password']);
   }
 }

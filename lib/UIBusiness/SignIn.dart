@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tukuntazotravel/UIBusiness/HomeUI.dart';
 import 'package:tukuntazotravel/UIBusiness/SignUp.dart';
 
 class LogIn extends StatelessWidget{
@@ -54,23 +56,21 @@ class _SignIn extends State<SignIn> {
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: const Color.fromRGBO(
-                    245, 245, 245, 1),
+                color: const Color.fromRGBO(245, 245, 245, 1),
                 borderRadius: BorderRadius.circular(30.0),
               ),
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0),
-              child: const Row(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
                 children: [
-                  Icon(Icons.person, color: Colors.red),
-                  SizedBox(width: 16.0),
+                  const Icon(Icons.lock, color: Colors.red),
+                  const SizedBox(width: 16.0),
                   Expanded(
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: _username,
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Usuario',
-                        hintStyle: TextStyle(
-                            color: Colors.grey),
+                        hintStyle: TextStyle(color: Colors.grey),
                       ),
                     ),
                   ),
@@ -92,6 +92,7 @@ class _SignIn extends State<SignIn> {
                   const SizedBox(width: 16.0),
                   Expanded(
                     child: TextField(
+                      controller: _password,
                       obscureText:
                       !_showPassword,
                       decoration: const InputDecoration(
@@ -162,7 +163,23 @@ class _SignIn extends State<SignIn> {
               margin:
               const EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  final correct = await getUser(_username.text, _password.text);
+                  if(correct) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                          const HomeUI()), // Navega a la pantalla de inicio
+                    );
+                  } else {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                          const SignUp()), // Navega a la pantalla de inicio
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(2, 35, 120, 1),
@@ -193,5 +210,13 @@ class _SignIn extends State<SignIn> {
         ),
       ),
     );
+  }
+  Future<bool> getUser(String username, String password) async {
+    // Obtain shared preferences.
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final List<String>? items = prefs.getStringList('items');
+    final pssword = items?.elementAt(1);
+
+    return pssword == null ? false : password == pssword ? true : false;
   }
 }
