@@ -72,28 +72,91 @@ class _Register extends State<Register> {
     super.dispose();
   }
 
+  bool _showPassword = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Regístrate'),
-      ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: txtEmail,
-              decoration: const InputDecoration(labelText: 'Email'),
+            const SizedBox(height: 1.0),
+            Container(
+              width: double.infinity,
+              height: 300.0,
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Image.asset('assets/images/signup.png'),
             ),
-            const SizedBox(height: 24.0),
-            TextField(
-              controller: txtContrasena,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Contraseña'),
+
+            const SizedBox(height: 24.0), // textField de Usuario
+            Container(
+              width: double.infinity, // Ocupar el 100% del ancho
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(245, 245, 245, 1), // Color de fondo #e3e3e3
+                borderRadius: BorderRadius.circular(30.0), // Bordes redondeados
+              ),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0), // Espaciado horizontal
+              child: const Row(
+                children: [
+                  Icon(Icons.person, color: Colors.red), // Icono
+                  SizedBox(width: 16.0), // Espacio entre el icono y el texto
+                  Expanded(
+                    child: TextField(
+                      // controller: txtEmail,
+                      decoration: InputDecoration(
+                        border: InputBorder.none, // Sin bordes
+                        hintText: 'Registra tu correo', // Placeholder
+                        hintStyle: TextStyle(
+                            color: Colors.grey), // Color del placeholder
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 24.0),
+
+            const SizedBox(height: 24.0), // textField de Contraseña
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(245, 245, 245, 1),
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                children: [
+                  const Icon(Icons.lock, color: Colors.red),
+                  const SizedBox(width: 16.0),
+                  Expanded(
+                    child: TextField(
+                      obscureText:
+                      !_showPassword, // Mostrar u ocultar contraseña según el estado
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Contraseña',
+                        hintStyle: TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      _showPassword ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.red,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _showPassword =
+                        !_showPassword; // Cambiar estado de visibilidad
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+
             ElevatedButton(
               onPressed: () {
                 signUp(txtEmail.text, txtContrasena.text);
