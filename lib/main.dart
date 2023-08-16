@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/auth/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-void main() async {
+Future<void> fetchFirebase() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+}
+
+void main() {
+  fetchFirebase();
   runApp(const MainApp());
 }
 
@@ -14,13 +18,13 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'DominicanTravel',
+      title: 'TukuntazoTravel',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home:
-          const SignIn(),
+          const LoginScreen(),
     );
   }
 }
