@@ -1,6 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tukuntazo_travel/auth/login_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:tukuntazo_travel/firebase_options.dart';
 
 Future<void> fetchFirebase() async {
   WidgetsFlutterBinding.ensureInitialized();
