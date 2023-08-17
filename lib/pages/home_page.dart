@@ -1,7 +1,10 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:tukuntazo_travel/pages/googleMapScreen.dart';
+import 'package:tukuntazo_travel/pages/recorrerJson.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -30,7 +33,7 @@ class HomePage extends StatelessWidget {
         body: const TabBarView(
           children: [
             GoogleMapsWidget(),
-            Center(child: Text('Buscar Content')),
+            OfficesWidget(),
             Center(child: Text('Capturar Content')),
             Center(child: Text('Favorites Content')),
             Center(child: Text('Profile Content')),
