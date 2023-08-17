@@ -3,17 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class Camara extends StatefulWidget {
+  const Camara({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Camara> createState() => _CamaraState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _CamaraState extends State<Camara> {
   File? image;
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
 
   Future pickImage(source) async {
     final image = await ImagePicker().pickImage(source: source);
@@ -28,38 +26,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pick Image'),
-        centerTitle: true,
-        backgroundColor: Colors.deepPurpleAccent,
-        foregroundColor: Colors.white,
-      ),
       body: Column(
         children: [
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: TextField(
-              controller: _titleController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Title',
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: TextField(
-              controller: _descriptionController,
-              maxLines: 3,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Description',
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 60),
           Center(
             child: Column(
               children: [
@@ -68,13 +37,13 @@ class _HomePageState extends State<HomePage> {
                   child: image != null
                       ? Image.file(
                           image!,
-                          height: 200,
-                          width: 200,
+                          height: 400,
+                          width: 400,
                         )
                       : const Padding(
                           padding: EdgeInsets.all(50.0),
                           child: Text(
-                            'Select an Image!',
+                            'Select a Image!',
                             style: TextStyle(
                               fontSize: 20,
                             ),
@@ -90,9 +59,8 @@ class _HomePageState extends State<HomePage> {
                         pickImage(ImageSource.camera);
                       },
                       style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(110, 50),
-                        backgroundColor: Colors.green,
-                      ),
+                          minimumSize: const Size(110, 50),
+                          backgroundColor: Colors.green),
                       child: const Text(
                         'Camera',
                         style: TextStyle(fontSize: 16),
@@ -103,16 +71,15 @@ class _HomePageState extends State<HomePage> {
                         pickImage(ImageSource.gallery);
                       },
                       style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(110, 50),
-                        backgroundColor: Colors.orange,
-                      ),
+                          minimumSize: const Size(110, 50),
+                          backgroundColor: Colors.orange),
                       child: const Text(
                         'Gallery',
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
                   ],
-                ),
+                )
               ],
             ),
           ),

@@ -2,6 +2,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:tukuntazo_travel/pages/googleMapScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'Camara.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -27,11 +28,11 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
             GoogleMapsWidget(),
             Center(child: Text('Buscar Content')),
-            Center(child: Text('Capturar Content')),
+            Camara(),
             Center(child: Text('Favorites Content')),
             Center(child: Text('Profile Content')),
           ],

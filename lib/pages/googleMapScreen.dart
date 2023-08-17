@@ -11,8 +11,8 @@ class GoogleMapsWidget extends StatefulWidget {
 class _GoogleMapsWidgetState extends State<GoogleMapsWidget> {
   late GoogleMapController mapController;
 
-
-  final LatLng _center = const LatLng(37.7749, -122.4194); // Ubicación inicial (San Francisco, CA)
+  final LatLng _center =
+      const LatLng(37.7749, -122.4194); // Ubicación inicial (San Francisco, CA)
 
   @override
   Widget build(BuildContext context) {
